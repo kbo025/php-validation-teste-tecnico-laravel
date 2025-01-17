@@ -17,16 +17,19 @@ public function index(Request $request)
 {
     $query = User::query();
 
-    if ($request->has('name')) {
-        $query->where('name', 'like', '%' . $request->input('name') . '%');
+    $name = $request->input('name');
+    if ($name && strlen($name) > 0) {
+        $query->where('name', 'ilike', '%' . $name . '%');
     }
 
-    if ($request->has('email')) {
-        $query->where('email', 'like', '%' . $request->input('email') . '%');
+    $email = $request->input('email');
+    if ($email && strlen($email) > 0) {
+        $query->where('email', 'ilike', '%' . $email . '%');
     }
 
-    if ($request->has('active')) {
-        $query->where('active', $request->input('active'));
+    $active = $request->input('active');
+    if ($active && strlen($active) > 0) {
+        $query->where('active', $active === '1' ? true : false);
     }
 
     $users = $query->paginate($request->input('per_page', 15));
@@ -78,8 +81,8 @@ public function index(Request $request)
 
         $user = User::findOrFail($id);
         $user->update($request->all());
-
-        return response()->json($user);
+        
+        return $request->all();
     }
 
     /**

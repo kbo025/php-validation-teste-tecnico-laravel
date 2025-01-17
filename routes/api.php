@@ -19,15 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware([
-    'auth:sanctum',
-    'active',
-])->group(
-    function () {
-        Route::apiResource('v1/users', UserController::class);
-        Route::delete('v1/users/batch', [UserController::class, 'destroyBatch']);
-    }
-);
+// Route::middleware([
+//     'auth:sanctum',
+//     'active',
+// ])->group(
+//     function () {
+//         Route::apiResource('v1/users', UserController::class);
+//         Route::delete('v1/users/batch', [UserController::class, 'destroyBatch']);
+//     }
+// );
 
-// Route::apiResource('v1/users', UserController::class);
-// Route::delete('v1/users/batch', [UserController::class, 'destroyBatch']);
+Route::apiResource('v1/users', UserController::class);
+Route::post('v1/users/delete-batch', [UserController::class, 'destroyBatch']);
