@@ -1,63 +1,83 @@
-# php-validation
-Teste Técnico
+# Project
 
-# Teste para à vaga de Desenvolvedor Full Stack
+## Requirements
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e inclusive velocidade de desenvolvimento.
+- PHP >= 7.4
+- Composer
+- Node.js
+- Docker (optional)
 
-## Instruções
+## Installation
 
-O desafio consiste em implementar uma aplicação web utilizando o framework PHP Laravel, um banco de dados relacional (Mysql ou Postgres), que terá como finalidade o cadastro de clientes em nossa base de dados.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/your-username/your-project.git
+    cd your-project
+    ```
 
-Sua aplicação deve possuir:
+2. Install PHP dependencies:
+    ```sh
+    composer install
+    ```
 
-- CRUD de clientes:
-  - Criar, editar, excluir e listar cadastros.
-- Um cliente pode se cadastrar apenas uma vez e com verificação de recaptcha no momento do cadastro.
-- Deve ser ser possível "ativar" e "desativar" o cliente, evitando assim no caso de ¨desativar¨ o mesmo que ele não consiga logar na aplicação.
-- Cada CRUD:
-  - Deve ser filtrável e ordenável por qualquer campo, e possuir paginação de 20 itens.
-  - Deve possuir formulários para criação e atualização de seus cadastros.
-  - Deve permitir a deleção de qualquer cliente.
-  - Implementar validações de campos obrigatórios e tipos de dados.
+3. Install Node.js dependencies:
+    ```sh
+    npm install
+    ```
 
-## Banco de dados
+4. Copy the environment file and configure it:
+    ```sh
+    cp .env.example .env
+    ```
 
-- O banco de dados deve ser criado ou editado utilizando Migrations do framework Laravel.
+5. Generate the application key:
+    ```sh
+    php artisan key:generate
+    ```
 
-## Tecnologias a serem utilizadas
+## Configuration
 
-Devem ser utilizadas as seguintes tecnologias:
+Make sure to configure the following parameters in your [.env](http://_vscodecontentref_/1) file:
 
-- HTML
-- CSS
-- Javascript
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
-- Mysql ou Postgres
+- Database:
+    ```ini
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=database_name
+    DB_USERNAME=username
+    DB_PASSWORD=password
+    ```
 
-## Entrega
+- Redis:
+    ```ini
+    REDIS_CLIENT=phpredis
+    REDIS_HOST=127.0.0.1
+    REDIS_PASSWORD=null
+    REDIS_PORT=6379
+    ```
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo README.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+- PHP Configuration (file [local.ini](http://_vscodecontentref_/2)):
+    ```ini
+    memory_limit = 512M
+    upload_max_filesize = 100M
+    post_max_size = 100M
+    max_execution_time = 300
+    ```
 
-## Bônus
+## Running the Project
 
-- API Rest JSON para todos os CRUDS listados acima.
-- Permitir deleção em massa de itens nos CRUDs.
-- Permitir que o usuário mude o número de itens por página.
-- Implementar autenticação de usuário na aplicação.
-- Testes unitários
+1. Compile the assets:
+    ```sh
+    npm run dev
+    ```
 
-## O que iremos analisar
+2. Start the development server:
+    ```sh
+    php artisan serve
+    ```
 
-- Organização do código;
-- Aplicação de design patterns;
-- Aplicação de testes;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
-
-### Boa sorte!
+3. Access the application in your browser:
+    ```
+    http://localhost:8000
+    ```
