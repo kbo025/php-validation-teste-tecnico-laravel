@@ -2,6 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
+import { Link } from '@inertiajs/vue3';
 
 const users = ref([]);
 const errorMessage = ref('');
@@ -96,6 +97,11 @@ onMounted(() => {
 
                     <!-- Control Bar -->
                     <div class="mb-4 flex justify-end">
+                        <Link 
+                            href="clients/create" 
+                            class="bg-blue-500 hover:bg-blue-700 text-white text-xs py-2 px-4 rounded ml-2">
+                                Novo
+                            </Link>
                         <button 
                             @click="deleteSelectedUsers" 
                             class="bg-red-500 hover:bg-red-700 text-white text-xs py-2 px-4 rounded"
@@ -107,16 +113,16 @@ onMounted(() => {
                     <!-- Filter Bar -->
                     <div class="mb-4 flex justify-between items-center">
                         <div>
-                            <label for="nameFilter" class="mr-2">Nome:</label>
-                            <input id="nameFilter" v-model="nameFilter" type="text" class="form-input" placeholder="Filtrar por nombre">
+                            <label for="nameFilter" class="mr-2 text-xs">Nome:</label>
+                            <input id="nameFilter" v-model="nameFilter" type="text" class="text-xs form-input" placeholder="Filtrar por nombre">
                         </div>
                         <div>
-                            <label for="emailFilter" class="mr-2">Email:</label>
-                            <input id="emailFilter" v-model="emailFilter" type="text" class="form-input" placeholder="Filtrar por email">
+                            <label for="emailFilter" class="mr-2 text-xs">Email:</label>
+                            <input id="emailFilter" v-model="emailFilter" type="text" class="text-xs form-input" placeholder="Filtrar por email">
                         </div>
                         <div>
-                            <label for="activeFilter" class="mr-2">Ativo:</label>
-                            <select id="activeFilter" v-model="activeFilter" class="form-select">
+                            <label for="activeFilter" class="mr-2 text-xs">Ativo:</label>
+                            <select id="activeFilter" v-model="activeFilter" class="form-select text-xs">
                                 <option value="">Todos</option>
                                 <option value="1">Sím</option>
                                 <option value="-1">Não</option>
@@ -131,6 +137,7 @@ onMounted(() => {
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ativo</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acts</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -149,6 +156,14 @@ onMounted(() => {
                                         {{ user.active ? 'sim' : 'não' }}
                                     </button>
                                 </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <Link 
+                                        :href="`/clients/${user.id}/edit`" 
+                                        class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded text-xs"
+                                    >
+                                        Edit
+                                    </Link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -156,8 +171,8 @@ onMounted(() => {
                     
                     <div class="mt-4">
                         <div>
-                            <label for="perPage" class="mr-2">Registros por página:</label>
-                            <select id="perPage" @change="handlePerPageChange" class="form-select">
+                            <label for="perPage" class="mr-2 text-xs">Registros por página:</label>
+                            <select id="perPage" @change="handlePerPageChange" class="form-select text-xs">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>

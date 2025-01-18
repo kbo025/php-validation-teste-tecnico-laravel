@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,9 @@ Route::middleware([
     Route::get('/clients', function () {
         return Inertia::render('Clients');
     })->name('clients');
+
+    Route::get('/clients/create', [Controller::class, 'createUser'])->name('clients.create');
+    Route::post('/clients', [Controller::class, 'storeUser'])->name('clients.store');
+    Route::get('/clients/{user}/edit', [Controller::class, 'editUser'])->name('clients.edit');
+    Route::put('/clients/{user}', [Controller::class, 'updateUser'])->name('clients.update');
 });
