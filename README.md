@@ -1,45 +1,46 @@
-# Project
+# Teste Dev: Gabriel Camacho
 
-## Requirements
+## Descrição
+
+Esse projeto é o resultado do teste para vaga de Developer. Foi usada como tecnologias principais PHP (Laravel) postgreSQL, nodejs e vuejs.
+
+### Foi entregue no prazo:
+
+- Registro de clientes (validado unicidade do usuario e recaptcha v3).
+- Excluir clientes (Incluindo deleção em masa).
+- Listar clientes + filtros + paginação.
+- Ativar / desativar clientes.
+- Login / Logout (os clientes desativados não podem logar)
+
+### Foi entregado fora do prazo:
+- Readme com instruções para rodar o projeto.
+- Configuração para container Docker criado com Laravel sail.
+
+### Não foi entregado:
+- Formulario para criar / editar clientes (logica criada com bug no frontend)
+
+## Requerimentos
 
 - PHP >= 7.4
 - Composer
 - Node.js
-- Docker (optional)
+- Docker
+- Docker Compose
 
-## Installation
+## Instalação
 
-1. Clone the repository:
+1. Clonar repositorio:
     ```sh
-    git clone https://github.com/your-username/your-project.git
+    git clone https://github.com/kbo025/php-validation-teste-tecnico-laravel/tree/Gabriel-Camacho
     cd your-project
     ```
 
-2. Install PHP dependencies:
-    ```sh
-    composer install
-    ```
-
-3. Install Node.js dependencies:
-    ```sh
-    npm install
-    ```
-
-4. Copy the environment file and configure it:
+2. Copiar o arquivo .env.example em .env
     ```sh
     cp .env.example .env
     ```
 
-5. Generate the application key:
-    ```sh
-    php artisan key:generate
-    ```
-
-## Configuration
-
-Make sure to configure the following parameters in your [.env](http://_vscodecontentref_/1) file:
-
-- Database:
+3. Atualice o .env como for necesario
     ```ini
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -49,35 +50,53 @@ Make sure to configure the following parameters in your [.env](http://_vscodecon
     DB_PASSWORD=password
     ```
 
-- Redis:
-    ```ini
-    REDIS_CLIENT=phpredis
-    REDIS_HOST=127.0.0.1
-    REDIS_PASSWORD=null
-    REDIS_PORT=6379
-    ```
-
-- PHP Configuration (file [local.ini](http://_vscodecontentref_/2)):
-    ```ini
-    memory_limit = 512M
-    upload_max_filesize = 100M
-    post_max_size = 100M
-    max_execution_time = 300
-    ```
-
-## Running the Project
-
-1. Compile the assets:
+4. Instalar dependencias de php:
     ```sh
-    npm run dev
+    composer install
     ```
 
-2. Start the development server:
+5. Inicialize o Laravel Sail
     ```sh
-    php artisan serve
+    ./vendor/bin/sail up
     ```
 
-3. Access the application in your browser:
+6. Criar as chaves do projeto
+    ```sh
+    ./vendor/bin/sail artisan key:generate
     ```
-    http://localhost:8000
+
+8. Rodar as migrações de laravel para construção do banco de dados
+    ```sh
+    ./vendor/bin/sail artisan migrate
     ```
+
+9. Rodar as seeds de laravel para popular a tabela de usarios com 10 clientes/usuarios
+    ```sh
+    ./vendor/bin/sail artisan db:seed
+    ```
+
+10. Instalar as dependencias de node para executar o frontend
+    ```sh
+    ./vendor/bin/sail npm install && ./vendor/bin/sail npm run dev
+    ```
+
+## Comandos Úteis
+
+### Parar os containers:
+    ```sh
+    ./vendor/bin/sail down
+    ```
+
+### Reconstrução de containers:
+    ```sh
+    ./vendor/bin/sail down
+    docker-compose rm -f
+    ./vendor/bin/sail build
+    ./vendor/bin/sail up -d
+    ```
+
+
+## Autor
+
+- [@kbo025](https://github.com/kbo025)
+
