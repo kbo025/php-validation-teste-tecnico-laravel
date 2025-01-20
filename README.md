@@ -80,6 +80,11 @@ Esse projeto é o resultado do teste para vaga de Developer. Foi usada como tecn
     ./vendor/bin/sail npm install && ./vendor/bin/sail npm run dev
     ```
 
+11. Entrar no site na url: localhost:8000, credenciais para login:
+    - user: test@example.com
+    - pass: 123456
+
+
 ## Comandos Úteis
 
 ### Parar os containers:
