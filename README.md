@@ -15,8 +15,6 @@ Esse projeto é o resultado do teste para vaga de Developer. Foi usada como tecn
 ### Foi entregado fora do prazo:
 - Readme com instruções para rodar o projeto.
 - Configuração para container Docker criado com Laravel sail.
-
-### Não foi entregado:
 - Formulario para criar / editar clientes (logica criada com bug no frontend)
 
 ## Requerimentos

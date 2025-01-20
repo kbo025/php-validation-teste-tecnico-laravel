@@ -16,7 +16,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post('/users', {
+    form.post('/clients', {
         onSuccess: () => {
             form.reset();
         },

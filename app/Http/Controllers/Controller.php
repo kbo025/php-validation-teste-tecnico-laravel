@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function createUser()
     {
-        return Inertia::render('Clients/CreateUser');
+        return Inertia::render('Clients/Create');
     }
 
     public function storeUser(Request $request)
@@ -40,7 +40,7 @@ class Controller extends BaseController
 
     public function editUser(User $user)
     {
-        return Inertia::render('Clients/Edit', [
+        return Inertia::render('Clients/Update', [
             'user' => $user
         ]);
     }

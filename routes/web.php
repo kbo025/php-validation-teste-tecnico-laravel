@@ -40,7 +40,7 @@ Route::middleware([
     })->name('clients');
 
     Route::get('/clients/create', [Controller::class, 'createUser'])->name('clients.create');
-    Route::post('/clients', [Controller::class, 'storeUser'])->name('clients.store');
     Route::get('/clients/{user}/edit', [Controller::class, 'editUser'])->name('clients.edit');
+    Route::post('/clients', [Controller::class, 'storeUser'])->name('clients.store');
     Route::put('/clients/{user}', [Controller::class, 'updateUser'])->name('clients.update');
 });

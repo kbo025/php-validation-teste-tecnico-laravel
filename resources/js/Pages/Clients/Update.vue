@@ -15,7 +15,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(`/users/${props.user.id}`, {
+    form.put(`/clients/${props.user.id}`, {
         onSuccess: () => {
             form.reset();
         },
