@@ -3,7 +3,12 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { Link } from '@inertiajs/vue3';
+import useAuth  from '@/plugins/useAuth';
 
+const {user, authenticated, login} = useAuth();
+
+const currentUser = ref(user);
+const auth = ref(authenticated);
 const users = ref([]);
 const errorMessage = ref('');
 const selectedUsers = ref<number[]>([]);
@@ -16,7 +21,9 @@ const activeFilter = ref('');
 
 const fetchUsers = async (page = 1, per_page = 5, name = '', email = '', active = '') => {
     try {
-        const response = await axios.get(`/users`, {
+
+        await axios.get('/sanctum/csrf-cookie');
+        const response = await axios.get(`/api/v1/users`, {
             params: {
                 page,
                 per_page,
@@ -36,7 +43,8 @@ const fetchUsers = async (page = 1, per_page = 5, name = '', email = '', active 
 
 const toggleUserActive = async (user) => {
     try {
-        const response = await axios.patch(`/users/${user.id}`, { active: !user.active });
+        await axios.get('/sanctum/csrf-cookie');
+        const response = await axios.patch(`/api/v1/users/${user.id}`, { active: !user.active });
         console.log('User updated:', response.data);
         user.active = !user.active;
     } catch (error) {
@@ -47,7 +55,8 @@ const toggleUserActive = async (user) => {
 
 const deleteSelectedUsers = async () => {
     try {
-        await axios.post('/users/delete-batch', { ids: selectedUsers.value });
+        await axios.get('/sanctum/csrf-cookie');
+        await axios.post('/api/v1/users/delete-batch', { ids: selectedUsers.value });
         users.value = users.value.filter(user => !selectedUsers.value.includes(user.id));
         selectedUsers.value = [];
     } catch (error) {
@@ -69,7 +78,7 @@ watch([nameFilter, emailFilter, activeFilter], () => {
     fetchUsers(currentPage.value, perPage.value, nameFilter.value, emailFilter.value, activeFilter.value);
 });
 
-onMounted(() => {
+onMounted(async () => {
     fetchUsers();
 });
 

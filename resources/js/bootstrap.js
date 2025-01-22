@@ -5,9 +5,16 @@
  */
 
 import axios from 'axios';
+import useAuth from './plugins/useAuth';
+
+const {attempt} = useAuth();
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-axios.defaults.baseURL = 'http://localhost:8000/api/v1';
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
+
+attempt().then(() => {}).catch(() => {});
 
 window.axios = axios;
 /**
